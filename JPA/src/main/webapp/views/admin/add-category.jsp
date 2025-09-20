@@ -5,16 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Thêm danh mục</title>
 </head>
 <body>
 	<form role="form" action="${pageContext.request.contextPath}/admin/category/add" method="post" enctype="multipart/form-data">
 		<div class="form-group">
-			<label>Tên danh mục:</label> <input class="form-control"
-				placeholder="please enter category Name" name="name" />
+			<label>Tên danh mục:</label>
+			<input class="form-control" placeholder="please enter category Name" name="name" />
 		</div>
 		<div class="form-group">
-			<label>Ảnh đại diện</label> <input type="file" name="icon" />
+			<label>Ảnh đại diện</label>
+			<input type="file" name="icon" />
 		</div>
 		<button type="submit" class="btn btn-default">Thêm</button>
 		<button type="reset" class="btn btn-primary">Hủy</button>

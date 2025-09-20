@@ -1,27 +1,26 @@
 package k8Edu.service;
 
-import k8Edu.model.UserModel;
+import k8Edu.entity.User;
 import k8Edu.dao.UserDao;
 import k8Edu.dao.UserDaoImpl;
-import org.mindrot.jbcrypt.BCrypt; // Import BCrypt cho việc băm mật khẩu
+import org.mindrot.jbcrypt.BCrypt;
 
 public class UserServiceImpl implements UserService {
 
-    UserDao userDao = new UserDaoImpl();
+    UserDao userDao = new UserDaoImpl(); // DAO phải thao tác với entity User
 
     @Override
-    public UserModel login(String username, String password) {
-        UserModel user = this.get(username);
-        // QUAN TRỌNG: So sánh mật khẩu đã băm
-        if (user != null && BCrypt.checkpw(password, user.getPassWord())) {
+    public User login(String username, String password) {
+        User user = this.get(username);
+        if (user != null && BCrypt.checkpw(password, user.getPassword())) {
             return user;
         }
         return null;
     }
 
     @Override
-    public UserModel get(String username) {
-        return userDao.get(username);
+    public User get(String username) {
+        return userDao.get(username); // DAO trả về entity
     }
 
     @Override
@@ -36,12 +35,14 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        long millis = System.currentTimeMillis();
-        java.sql.Date date = new java.sql.Date(millis);
+        String hashedPassword = hashPassword(password);
+        User newUser = new User();
+        newUser.setEmail(email);
+        newUser.setUserName(username);
+        newUser.setFullname(fullname);
+        newUser.setPassword(hashedPassword);
+        newUser.setPhone(phone);
 
-        String hashedPassword = hashPassword(password); // Băm mật khẩu trước khi lưu
-
-        UserModel newUser = new UserModel(email, username, fullname, hashedPassword, null, 5, phone, date);
         return userDao.insert(newUser);
     }
 
@@ -61,20 +62,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean insert(UserModel user) {
+    public boolean insert(User user) {
         return userDao.insert(user);
     }
 
-    // --- Các phương thức cho Quên Mật khẩu (Không gửi email) ---
-
     @Override
-    public UserModel getUserByEmail(String email) {
+    public User getUserByEmail(String email) {
         return userDao.getUserByEmail(email);
     }
 
     @Override
-    public boolean resetPasswordWithoutToken(int userId, String newPassword) {
-        String hashedPassword = hashPassword(newPassword); // Băm mật khẩu mới
+    public boolean resetPasswordWithoutToken(Long userId, String newPassword) {
+        String hashedPassword = hashPassword(newPassword);
         return userDao.updatePassword(userId, hashedPassword);
     }
 
