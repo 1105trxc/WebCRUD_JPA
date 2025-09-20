@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
-import k8Edu.model.Category;
+import k8Edu.entity.Category; // Sửa lại import: dùng entity
 import k8Edu.service.CategoryService;
 import k8Edu.service.CategoryServiceImpl;
 
@@ -28,7 +28,7 @@ public class CategoryEditController extends HttpServlet {
     private final CategoryService cateService = new CategoryServiceImpl();
 
     // Thư mục upload
-    private static final String UPLOAD_DIR = "E:/upload/category";
+    private static final String UPLOAD_DIR = "D:/upload/category"; // Đổi sang D cho nhất quán
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -49,7 +49,7 @@ public class CategoryEditController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
 
-        Category category = new Category();
+        Category category = new Category(); // Dùng entity
         category.setId(Integer.parseInt(req.getParameter("id")));
         category.setName(req.getParameter("name"));
 
@@ -75,10 +75,10 @@ public class CategoryEditController extends HttpServlet {
 
             category.setIcon("category/" + fileName);
         } else {
-            category.setIcon(null); // hoặc giữ icon cũ tuỳ ý
+            category.setIcon(null); // hoặc giữ icon cũ tuỳ ý, thường xử lý ở Service/DAO
         }
 
-        cateService.edit(category);
+        cateService.edit(category); // entity type
         resp.sendRedirect(req.getContextPath() + "/admin/category/list");
     }
 }

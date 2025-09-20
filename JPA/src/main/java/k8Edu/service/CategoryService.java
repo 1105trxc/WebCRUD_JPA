@@ -1,7 +1,7 @@
 package k8Edu.service;
 
 import java.util.List;
-import k8Edu.entity.Category; // Đổi sang entity
+import k8Edu.entity.Category;
 
 public interface CategoryService {
     void insert(Category category);

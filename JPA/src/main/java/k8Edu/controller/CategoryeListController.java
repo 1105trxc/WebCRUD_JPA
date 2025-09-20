@@ -9,20 +9,20 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import k8Edu.model.Category;
+
+// Sửa lại import: dùng entity
+import k8Edu.entity.Category;
 import k8Edu.service.*;
 
-	@WebServlet(urlPatterns = { "/admin/category/list" })
-	public class CategoryeListController extends HttpServlet {
-		CategoryService cateService = new CategoryServiceImpl();
+@WebServlet(urlPatterns = { "/admin/category/list" })
+public class CategoryeListController extends HttpServlet {
+    CategoryService cateService = new CategoryServiceImpl();
 
-		@Override
-		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			List<Category> cateList = cateService.getAll();
-			req.setAttribute("cateList", cateList);
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/views/admin/list-category.jsp");
-					dispatcher.forward(req, resp);
-		}
-	}
-
-
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Category> cateList = cateService.getAll(); // entity type
+        req.setAttribute("cateList", cateList);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/views/admin/list-category.jsp");
+        dispatcher.forward(req, resp);
+    }
+}

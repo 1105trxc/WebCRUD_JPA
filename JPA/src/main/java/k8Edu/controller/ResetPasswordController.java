@@ -23,7 +23,7 @@ public class ResetPasswordController extends HttpServlet {
         HttpSession session = request.getSession(false); // Không tạo session mới nếu chưa có
         if (session == null || session.getAttribute("resetUserId") == null) {
             request.setAttribute("alert", "Phiên đặt lại mật khẩu không hợp lệ hoặc đã hết hạn. Vui lòng thử lại.");
-            response.sendRedirect(request.getContextPath() + "/forgotPassword"); // Chuyển hướng về trang yêu cầu quên mật khẩu
+            response.sendRedirect(request.getContextPath() + "/forgotPassword");
             return;
         }
 
@@ -41,7 +41,22 @@ public class ResetPasswordController extends HttpServlet {
             return;
         }
 
-        int userId = (int) session.getAttribute("resetUserId");
+        Long userId = null;
+        Object userIdObj = session.getAttribute("resetUserId");
+        if (userIdObj instanceof Long) {
+            userId = (Long) userIdObj;
+        } else if (userIdObj instanceof Integer) {
+            userId = ((Integer) userIdObj).longValue();
+        } else if (userIdObj instanceof String) {
+            userId = Long.valueOf((String) userIdObj);
+        }
+        // Nếu vẫn null, báo lỗi
+        if (userId == null) {
+            request.setAttribute("alert", "Lỗi hệ thống: Không xác định user cần đặt lại mật khẩu.");
+            request.getRequestDispatcher("/resetPassword.jsp").forward(request, response);
+            return;
+        }
+
         String newPassword = request.getParameter("newPassword");
         String confirmPassword = request.getParameter("confirmPassword");
 
@@ -57,15 +72,12 @@ public class ResetPasswordController extends HttpServlet {
             return;
         }
 
-        // Thêm kiểm tra độ mạnh mật khẩu nếu cần (ví dụ: độ dài tối thiểu)
-        // if (newPassword.length() < 6) { request.setAttribute("alert", "Mật khẩu phải có ít nhất 6 ký tự."); ... }
-
         boolean success = userService.resetPasswordWithoutToken(userId, newPassword);
 
         if (success) {
-            session.removeAttribute("resetUserId"); // Xóa userId khỏi session sau khi reset thành công
+            session.removeAttribute("resetUserId");
             request.setAttribute("success", "Mật khẩu của bạn đã được đặt lại thành công! Vui lòng đăng nhập với mật khẩu mới.");
-            response.sendRedirect(request.getContextPath() + "/login.jsp"); // Chuyển hướng về trang đăng nhập
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
         } else {
             request.setAttribute("alert", "Có lỗi xảy ra khi đặt lại mật khẩu. Vui lòng thử lại.");
             request.getRequestDispatcher("/resetPassword.jsp").forward(request, response);

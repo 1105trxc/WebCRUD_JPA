@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class DBconnect {
 	private final String serverName = "localhost";
-	private final String dbName = "LTWeb";
+	private final String dbName = "JPA_WEB";
 	private final String portNumber = "1433";
 	private final String instance = "";
 	private final String userID = "";

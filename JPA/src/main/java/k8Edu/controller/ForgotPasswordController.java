@@ -5,8 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession; // Sử dụng HttpSession để lưu trữ userId
-import k8Edu.model.UserModel;
+import jakarta.servlet.http.HttpSession;
+
+import k8Edu.entity.User; // Sửa lại import: dùng entity
 import k8Edu.service.UserService;
 import k8Edu.service.UserServiceImpl;
 
@@ -33,7 +34,7 @@ public class ForgotPasswordController extends HttpServlet {
             return;
         }
 
-        UserModel user = userService.getUserByEmail(email);
+        User user = userService.getUserByEmail(email); // entity
         if (user == null) {
             request.setAttribute("alert", "Email không tồn tại trong hệ thống.");
             request.getRequestDispatcher("/forgotPassword.jsp").forward(request, response);
@@ -42,7 +43,7 @@ public class ForgotPasswordController extends HttpServlet {
 
         // Nếu email tồn tại, lưu userId vào session và chuyển hướng ngay đến trang đặt lại mật khẩu
         HttpSession session = request.getSession();
-        session.setAttribute("resetUserId", user.getId()); // Lưu ID người dùng vào session
+        session.setAttribute("resetUserId", user.getId()); // Lưu ID người dùng vào session (Long)
 
         response.sendRedirect(request.getContextPath() + "/resetPassword"); // Chuyển hướng đến trang đặt lại mật khẩu
     }
