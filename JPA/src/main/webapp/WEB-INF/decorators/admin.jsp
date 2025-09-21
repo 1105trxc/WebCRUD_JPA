@@ -5,11 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title><sitemesh:write property="title" /></title>
-<link
-	href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet" />
-<link href="${pageContext.request.contextPath}/common/admin/admin.css"
-	rel="stylesheet" />
+<!-- Bootstrap CSS CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- Custom admin CSS -->
+<link href="${pageContext.request.contextPath}/common/admin/admin.css" rel="stylesheet" />
 </head>
 <body>
 	<div class="d-flex">
@@ -45,7 +44,7 @@
 		</div>
 	</div>
 
-	<script
-		src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Bootstrap JS CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

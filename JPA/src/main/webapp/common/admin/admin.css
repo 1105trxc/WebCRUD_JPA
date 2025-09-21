@@ -1,0 +1,95 @@
+/* Giao diện bảng danh mục */
+h2 {
+    margin-top: 10px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    color: #333;
+    font-size: 1.8rem;
+}
+
+.table {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 24px;
+    font-size: 1rem;
+}
+
+.table th {
+    background: #007bff;
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+    border: none;
+}
+
+.table td {
+    vertical-align: middle;
+    text-align: center;
+    border: none;
+    color: #333;
+}
+
+.btn {
+    font-size: 0.95rem;
+    padding: 6px 16px;
+    border-radius: 5px;
+    box-shadow: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-success {
+    background: #28a745;
+    color: #fff;
+    border: none;
+}
+
+.btn-success:hover {
+    background: #218838;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: #fff;
+    border: none;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+}
+
+/* Responsive bảng */
+@media (max-width: 768px) {
+    .table thead {
+        display: none;
+    }
+    .table tr {
+        display: block;
+        margin-bottom: 15px;
+    }
+    .table td {
+        display: block;
+        text-align: right;
+        position: relative;
+        padding-left: 50%;
+    }
+    .table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+}

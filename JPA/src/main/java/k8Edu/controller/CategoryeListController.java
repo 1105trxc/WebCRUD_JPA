@@ -21,7 +21,7 @@ public class CategoryeListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Category> cateList = cateService.getAll(); // entity type
-        req.setAttribute("cateList", cateList);
+        req.setAttribute("categories", cateList);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/admin/list-category.jsp");
         dispatcher.forward(req, resp);
     }
