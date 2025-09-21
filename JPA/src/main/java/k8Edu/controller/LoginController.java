@@ -67,7 +67,7 @@ public class LoginController extends HttpServlet {
             HttpSession session = req.getSession(true);
             session.setAttribute("account", user); // lưu entity
 
-            resp.sendRedirect(req.getContextPath() + "/home.jsp");
+            resp.sendRedirect(req.getContextPath() + "/views/home.jsp");
         } else {
             req.setAttribute("alert", "Tài khoản hoặc mật khẩu không đúng");
             req.getRequestDispatcher("/views/login.jsp").forward(req, resp);

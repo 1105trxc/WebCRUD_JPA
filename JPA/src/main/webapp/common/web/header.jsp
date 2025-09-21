@@ -15,14 +15,19 @@
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="#">Trang chủ</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Danh mục</a>
+
+				<li class="nav-item"><a class="nav-link"
+				 href="${pageContext.request.contextPath}/admin/category/list">Danh mục</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#">Sản phẩm</a>
+
+				<li class="nav-item"><a class="nav-link"
+				 href="${pageContext.request.contextPath}/admin/category/list">Sản phẩm</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav d-flex">
 				<li class="nav-item"><a class="nav-link"
 					href="${pageContext.request.contextPath}/login">Đăng nhập</a></li>
+
 				<li class="nav-item"><a class="nav-link"
 					href="${pageContext.request.contextPath}/register">Đăng ký</a></li>
 			</ul>

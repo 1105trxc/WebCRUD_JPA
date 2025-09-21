@@ -36,8 +36,7 @@
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
-			<version>12.10.1.jre11</version>
-			<scope>compile</scope>
+			<version>13.2.0.jre11</version>
 		</dependency>
 		<!--
 		https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api -->

@@ -65,19 +65,19 @@ public class RegisterController extends HttpServlet {
         if (service.checkExistEmail(email)) {
             alertMsg = "Email đã tồn tại!";
             req.setAttribute("alert", alertMsg);
-            req.getRequestDispatcher("/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/views/register.jsp").forward(req, resp);
             return;
         }
         if (service.checkExistUsername(username)) {
             alertMsg = "Tài khoản đã tồn tại!";
             req.setAttribute("alert", alertMsg);
-            req.getRequestDispatcher("/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/views/register.jsp").forward(req, resp);
             return;
         }
 
         boolean isSuccess = service.register(username, password, email, fullname, phone);
         if (isSuccess) {
-            resp.sendRedirect(req.getContextPath() + "/login.jsp");
+            resp.sendRedirect(req.getContextPath() + "/views/login.jsp");
         } else {
             alertMsg = "System error!";
             req.setAttribute("alert", alertMsg);
